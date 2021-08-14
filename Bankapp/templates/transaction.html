@@ -1,0 +1,170 @@
+{% extends 'base.html' %} 
+
+{% block title %} Infinite Bank | Transactions {%endblock %} 
+
+{% block styles %}
+<style>
+  .transac-head {
+    text-align: center;
+    margin: 30px auto;
+  }
+
+  .trans-btn button {
+    margin-top: 30px;
+    float: right;
+  } 
+
+  .trans-back{
+    margin-top: 30px;
+    float: left;
+  }
+  @media only screen and (max-width: 600px) {
+    .from-div {
+    width: 100%;
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+  }
+
+  .to-div {
+    width: 100%;
+    display: inline-block;
+    margin-top: 20px;
+
+  }
+    .amount {
+    width: 100%;
+    display: inline-block;
+    margin-top: 20px;
+    margin-top: 50px;
+  }
+  .trans-btn button{
+    width: 100%;
+    margin-top: 100px;
+  }
+  .back button{
+    width: 100% !important;
+    margin-top: 20px;
+  }
+}
+</style>
+
+{% endblock %}
+ {% block body %}
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand navBrand">
+      <img
+        src="https://pngimg.com/uploads/bank/bank_PNG28.png"
+        alt=""
+        width="40"
+        height="30"
+      />
+      Infinite Bank
+    </a>
+    <a class="navbar-brand" href="#"></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'customers' %}"
+            >View customers</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'history' %}">Transaction History</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <!-- TRANSACTIONS HEADING SECTION -->
+
+  <h1 class="transac-head">Transactions</h1>
+
+  <!-- TRANSACTIONS MAIN SECTION -->
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12 from-div">
+        <label for="">From</label>
+        <select
+          class="form-select w-100 select"
+          aria-label="Default select example"
+          name="fromid"
+        >
+          <option selected disabled>Open this select menu</option>
+          <option value="{{trans_id}}">{{trans_name}}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-12 to-div">
+        <label for="">To</label>
+        <select
+          class="form-select w-100"
+          aria-label="Default select example"
+          name="toid"
+        >
+          <option selected disabled>Open this select menu</option>
+          {% for i in customers%}
+          <option value="{{i.id}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-12 amount">
+        <label for="">Amount</label>
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping">@</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Amount"
+            aria-label="Username"
+            aria-describedby="addon-wrapping"
+            name="amount"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="trans-btn">
+      <button class="btn btn-success">Transfer</button>
+    </div>
+  </form>
+
+  <div class="back">
+    <a href="{% url 'indcustomer' %}" class="anch-btn">
+      <button class="btn btn-secondary back-btn">Back</button>
+    </a>
+  </div>
+
+
+  {% if error %}
+  <script>
+    alert("{{error}}");
+  </script>
+  {% endif %}
+</div>
+
+{% endblock %}

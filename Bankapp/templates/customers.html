@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %} Infinite Bank | Customers {% endblock title %}
+
+
+{% block styles %}
+<style>
+.customer-head{
+    text-align: center;
+    margin: 30px auto;
+}
+</style>
+{% endblock %}
+
+{% block body %} 
+
+<!-- NAVBAR SECTION -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand navBrand">
+            <img src="https://pngimg.com/uploads/bank/bank_PNG28.png" alt="" width="40" height="30">
+            Infinite Bank
+        </a>
+      <a class="navbar-brand navBrand"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'customers' %}">View customers</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="{% url 'transaction' %}">Transactions</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'history' %}">Transaction History</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CUSTOMER DETAILS HEAD -->
+
+  <h1 class="customer-head">Customers Details</h1>
+  <hr>
+
+  <!-- CUSTOMERS DETAILS SECTION -->
+
+
+<div class="table-responsive">
+
+
+  <table class="container table table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Current Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in customers %}
+      <tr>
+        <th scope="row">{{i.id}}</th>
+       
+        <td> 
+        <form action="" id="customer_form" method="POST">
+            {% csrf_token %}
+          <!-- <a href="" onclick="customer_name()"></a> -->
+          <button type="submit" class="btn btn-link" value="{{i.id}}" name="customer">{{i.name}}</button>
+        </form>
+      </td>
+        <td>{{i.email}}</td>
+        <td>{{i.phone}}</td>
+        <td>{{i.bal}}</td>
+      </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+
+</div>
+
+  <script type="text/javascript">
+    function customer_name(){
+     document.querySelector('#customer_form').submit();
+     return false;
+   }
+
+ </script>
+
+
+{% endblock %}

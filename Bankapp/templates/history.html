@@ -1,0 +1,92 @@
+{% extends 'base.html' %} 
+{% block title %} Infinite Bank | History {% endblock %} 
+
+{% block styles %} 
+<style>
+.history-head{
+    text-align: center;
+    margin: 30px auto;
+}
+</style>
+{% endblock %} 
+
+
+{% block body %}
+
+    <!-- NAVBAR SECTION -->
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand navBrand">
+          <img
+            src="https://pngimg.com/uploads/bank/bank_PNG28.png"
+            alt=""
+            width="40"
+            height="30"
+          />
+          Infinite Bank
+        </a>
+        <a class="navbar-brand" href="#"></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{% url 'customers' %}"
+                >View customers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'history' %}">Transaction History</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+ <!-- HISTORY HEAD -->
+
+ <h1 class="history-head">Transaction Details</h1>
+
+ <hr>
+
+ <div class="table-responsive">
+
+ <table class="container table table-hover mt-5">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col">Transfered Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in hist %}
+    <tr>
+      <th scope="row">{{i.id}}</th>
+      <td>{{i.from_name}}</td>
+      <td>{{i.to_name}}</td>
+      <td>{{i.trans_amt}}</td>
+    </tr>
+  {% endfor %}
+   
+  </tbody>
+</table>
+</div>
+{% endblock %}

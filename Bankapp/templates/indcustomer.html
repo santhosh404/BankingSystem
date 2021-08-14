@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Infinte Bank | Customer {% endblock %}
+
+
+{% block styles %}
+<style>
+
+
+.indcustomer-head{
+    text-align: center;
+    margin: 30px auto;
+}
+
+.transfer{
+  width: 100%;
+  background-color: red;
+  margin-top: 20px;
+
+}
+
+.transfer button{
+  float: right;
+}
+.transfer .back{
+  float: left;
+}
+
+@media only screen and (max-width: 600px){
+  .indcustomer-head{
+    text-align: center;
+    margin: 50px auto;
+    font-size: 25px;
+}
+  .transfer button{
+    margin:10px auto;
+    width: 100%;
+
+  }
+}
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+<h1 class="indcustomer-head">Hello {{incustomer.name}}, Welcome to Infinite Bank</h1>
+
+<hr>
+
+
+<div class="table-responsive">
+
+
+<table class="container table table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Current Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{incustomer.id}}</th>
+        <td>{{incustomer.name}}</a></td>
+        <td>{{incustomer.email}}</td>
+        <td>{{incustomer.phone}}</td>
+        <td>{{incustomer.bal}}</td>
+      </tr>
+     </tbody>
+    </table> 
+</div>
+
+    <div class="container transfer">
+      <a href="{% url 'index' %}"><button class="btn btn-secondary back"> Back</button></a>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit" value="{{incustomer.name}}" name="transfername">Transfer Amount</button>
+    </form>
+
+  </div>
+{% endblock %}
