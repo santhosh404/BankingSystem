@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j#%%cr94$3)6ke)5@x3-d4yr5ahk-z30!y02(f@jbd+7!6=3wh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =['infinitebank.herokuapp.com']
 
 
 # Application definition
